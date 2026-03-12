@@ -9,9 +9,9 @@
   "main": "src/app.ts",
   "scripts": {
     "dev": "bun run src/app.ts",
-    "fmt": "oxfmt",
+    "fmt:fix": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "lint": "oxlint --fix",
+    "lint:fix": "oxlint --fix",
     "lint:check": "oxlint",
     "prepare": "husky"
   },

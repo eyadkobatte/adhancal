@@ -1,7 +1,7 @@
 import type { Configuration } from 'lint-staged';
 
 const config: Configuration = {
-  '*.{ts}': ['bun lint:check', 'bun fmt:check'],
+  '*.{ts}': ['bun lint:fix', 'bun fmt:fix'],
 };
 
 export default config;
