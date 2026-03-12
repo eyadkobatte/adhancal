@@ -9,9 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node --test test/**/*.test.js",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P src/app.ts"
+    "dev": "node src/app.ts"
   },
   "keywords": [],
   "author": "Eyad Kobatte <ekobatte96@gmail.com>",
