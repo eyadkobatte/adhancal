@@ -1,5 +1,5 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
+  "exclude": ["oxlint.config.ts", "oxfmt.config.ts"],
   "compilerOptions": {
     // File Layout
     "rootDir": "./src",
@@ -7,12 +7,10 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
+    "module": "preserve",
     "target": "esnext",
-    // For nodejs:
+    "moduleResolution": "bundler",
     "lib": ["esnext"],
-    "types": ["node"],
-    // and npm install -D @types/node
 
     // Other Outputs
     "sourceMap": true,
@@ -38,5 +36,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+  },
 }
