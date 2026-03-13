@@ -19,6 +19,13 @@ export default defineConfig({
   rules: {
     'eslint/no-unused-vars': 'error',
     'import/no-default-export': 'off',
+    'import/no-relative-parent-imports': 'off',
+    'no-duplicate-imports': ['error', { allowSeparateTypeImports: true }],
+    'sort-imports': 'off',
+    'typescript/parameter-properties': [
+      'error',
+      { prefer: 'parameter-property' },
+    ],
   },
   settings: {},
 });

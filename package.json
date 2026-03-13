@@ -1,14 +1,15 @@
 {
-  "name": "azancal",
+  "name": "adhancal",
   "version": "1.0.0",
-  "description": "Azan calendar subscription",
+  "description": "Adhan calendar subscription",
   "keywords": [],
   "license": "ISC",
   "author": "Eyad Kobatte <ekobatte96@gmail.com>",
   "type": "module",
   "main": "src/app.ts",
   "scripts": {
-    "dev": "bun run src/app.ts",
+    "dev": "bun --hot src/app.ts",
+    "dev:watch": "bun --watch src/app.ts",
     "fmt:fix": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint:fix": "oxlint --fix",
@@ -26,5 +27,8 @@
     "oxlint": "^1.55.0",
     "typescript": "^5.9.3"
   },
-  "packageManager": "bun@1.13.10"
+  "packageManager": "bun@1.13.10",
+  "dependencies": {
+    "zod": "^4.3.6"
+  }
 }
