@@ -4,6 +4,7 @@ import type { ZodSafeParseResult } from 'zod';
 import { object, string } from 'zod';
 
 import adhanTimeConfiguration from '../db/adhanTimeConfiguration.repository';
+import logger from '../utils/logger';
 
 const schema = object({
   city: string(),
@@ -19,7 +20,7 @@ const validator = async (
 const createCalendarEvent = async (request: BunRequest): Promise<Response> => {
   const validated = await validator(request);
   if (!validated.success) {
-    console.error('Error in request', validated.error);
+    logger.error('Error in request', validated.error);
     return new Response(validated.error.message, { status: 400 });
   }
   const id = Bun.randomUUIDv7();
