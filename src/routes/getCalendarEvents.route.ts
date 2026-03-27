@@ -1,4 +1,4 @@
-import adhanTimeConfiguration from '../db/adhanTimeConfiguration.repository';
+import adhanTimeConfiguration from '../db/adhanTimeConfiguration/adhanTimeConfiguration.repository';
 
 const handler = (): Response => {
   const configurations = adhanTimeConfiguration.getAll();

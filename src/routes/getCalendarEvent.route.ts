@@ -3,8 +3,8 @@ import type { ZodSafeParseResult, infer as ZInfer } from 'zod';
 
 import { object, string } from 'zod';
 
-import adhan from '../clients/adhan.client';
-import adhanTimeConfiguration from '../db/adhanTimeConfiguration.repository';
+import adhan from '../clients/adhan/adhan.client';
+import adhanTimeConfiguration from '../db/adhanTimeConfiguration/adhanTimeConfiguration.repository';
 import logger from '../utils/logger';
 
 const schema = object({ id: string() });
@@ -24,6 +24,7 @@ const getCalendarEvent = (request: BunRequest): Response => {
   const { id } = validated.data;
   const configuration = adhanTimeConfiguration.getOne(id);
   const prayerTimes = adhan.getPrayerTimesForToday(configuration);
+
   return Response.json({ configuration, prayerTimes });
 };
 

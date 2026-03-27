@@ -4,7 +4,7 @@ import type {
 } from './adhanTimeConfiguration.dto';
 import type { Database, Statement } from 'bun:sqlite';
 
-import db from './db.client';
+import db from '../db.client';
 
 class AdhanTimeConfigurationRepository {
   private readonly statements: {
@@ -17,17 +17,18 @@ class AdhanTimeConfigurationRepository {
     this.statements = {
       create: this.database.prepare(
         `INSERT INTO adhanTimeConfigurations (
-          id, 
-          calculationMethod, 
-          latitude, 
-          longitude, 
-          fajrAngle, 
-          maghribAngle, 
-          ishaAngle, 
-          ishaInterval, 
-          madhab, 
-          highLatitudeRule
-        ) VALUES (:id, :calculationMethod, :latitude, :longitude, :fajrAngle, :maghribAngle, :ishaAngle, :ishaInterval, :madhab, :highLatitudeRule) RETURNING *`,
+          id,
+          calculationMethod,
+          latitude,
+          longitude,
+          fajrAngle,
+          maghribAngle,
+          ishaAngle,
+          ishaInterval,
+          madhab,
+          highLatitudeRule,
+          prayerDuration
+        ) VALUES (:id, :calculationMethod, :latitude, :longitude, :fajrAngle, :maghribAngle, :ishaAngle, :ishaInterval, :madhab, :highLatitudeRule, :prayerDuration) RETURNING *`,
       ),
       getAll: this.database.prepare('SELECT * from adhanTimeConfigurations'),
       getOne: this.database.prepare(
@@ -51,6 +52,7 @@ class AdhanTimeConfigurationRepository {
       longitude: configuration.longitude,
       madhab: configuration.madhab ?? null,
       maghribAngle: configuration.maghribAngle ?? null,
+      prayerDuration: configuration.prayerDuration,
     }) as AdhanTimeConfigurationWithIdDto;
   }
 

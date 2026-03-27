@@ -1,6 +1,6 @@
 import { expect, test, describe } from 'bun:test';
 
-import VALID_CALCULATION_METHODS from '../clients/adhan.calculationMethods.constants';
+import VALID_CALCULATION_METHODS from '../../clients/adhan/adhan.calculationMethods.constants';
 import AdhanTimeConfigurationSchema from './adhanTimeConfiguration.schema';
 
 describe('AdhanTimeConfigurationSchema', () => {

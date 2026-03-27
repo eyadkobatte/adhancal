@@ -3,8 +3,8 @@ import type { ZodSafeParseResult, infer as ZInfer } from 'zod';
 
 import { object } from 'zod';
 
-import adhanTimeConfigurationRepository from '../db/adhanTimeConfiguration.repository';
-import AdhanTimeConfigurationSchema from '../db/adhanTimeConfiguration.schema';
+import adhanTimeConfigurationRepository from '../db/adhanTimeConfiguration/adhanTimeConfiguration.repository';
+import AdhanTimeConfigurationSchema from '../db/adhanTimeConfiguration/adhanTimeConfiguration.schema';
 import logger from '../utils/logger';
 
 const schema = object({

@@ -1,4 +1,4 @@
-import type { AdhanTimeConfigurationWithoutIdDto } from '../db/adhanTimeConfiguration.repository';
+import type { AdhanTimeConfigurationWithoutIdDto } from '../../db/adhanTimeConfiguration/adhanTimeConfiguration.dto';
 
 import { Coordinates, CalculationMethod, PrayerTimes } from 'adhan';
 

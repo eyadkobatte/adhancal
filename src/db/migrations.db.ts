@@ -14,7 +14,12 @@ const MIGRATIONS = [
       ishaAngle INTEGER,
       maghribAngle INTEGER,
       madhab TEXT,
-      highLatitudeRule TEXT
+      highLatitudeRule TEXT,
+
+      prayerDuration TEXT NOT NULL,
+
+      createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
+      updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
     )
   `,
   },
