@@ -1,13 +1,16 @@
 import type { BunRequest } from 'bun';
-import type { ZodSafeParseResult } from 'zod';
+import type { ZodSafeParseResult, infer as ZInfer } from 'zod';
 
 import { object, string } from 'zod';
 
+import adhan from '../clients/adhan.client';
 import adhanTimeConfiguration from '../db/adhanTimeConfiguration.repository';
 import logger from '../utils/logger';
 
 const schema = object({ id: string() });
-const validator = (request: BunRequest): ZodSafeParseResult<{ id: string }> => {
+const validator = (
+  request: BunRequest,
+): ZodSafeParseResult<ZInfer<typeof schema>> => {
   const body = request.params;
   return schema.safeParse(body);
 };
@@ -20,7 +23,8 @@ const getCalendarEvent = (request: BunRequest): Response => {
   }
   const { id } = validated.data;
   const configuration = adhanTimeConfiguration.getOne(id);
-  return Response.json({ configuration });
+  const prayerTimes = adhan.getPrayerTimesForToday(configuration);
+  return Response.json({ configuration, prayerTimes });
 };
 
 export default getCalendarEvent;

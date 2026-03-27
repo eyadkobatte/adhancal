@@ -1,46 +1,69 @@
-import type { Database } from 'bun:sqlite';
+import type {
+  AdhanTimeConfigurationWithIdDto,
+  AdhanTimeConfigurationWithoutIdDto,
+} from './adhanTimeConfiguration.dto';
+import type { Database, Statement } from 'bun:sqlite';
 
 import db from './db.client';
 
-interface AdhanTimeConfiguratioDto {
-  id: string;
-  city: string;
-  country: string;
-}
-class AdhanTimeConfiguration {
+class AdhanTimeConfigurationRepository {
   private readonly statements: {
-    create: ReturnType<Database['prepare']>;
-    getAll: ReturnType<Database['prepare']>;
-    getOne: ReturnType<Database['prepare']>;
+    // oxlint-disable-next-line typescript/no-explicit-any
+    create: Statement<AdhanTimeConfigurationWithIdDto, [any]>;
+    getAll: Statement<AdhanTimeConfigurationWithIdDto, []>;
+    getOne: Statement<AdhanTimeConfigurationWithIdDto, [string]>;
   };
   constructor(private readonly database: Database) {
     this.statements = {
       create: this.database.prepare(
-        'INSERT INTO adhanTimeConfiguration (id, city, country) VALUES (?, ?, ?) RETURNING *',
+        `INSERT INTO adhanTimeConfigurations (
+          id, 
+          calculationMethod, 
+          latitude, 
+          longitude, 
+          fajrAngle, 
+          maghribAngle, 
+          ishaAngle, 
+          ishaInterval, 
+          madhab, 
+          highLatitudeRule
+        ) VALUES (:id, :calculationMethod, :latitude, :longitude, :fajrAngle, :maghribAngle, :ishaAngle, :ishaInterval, :madhab, :highLatitudeRule) RETURNING *`,
       ),
-      getAll: this.database.prepare('SELECT * from adhanTimeConfiguration'),
+      getAll: this.database.prepare('SELECT * from adhanTimeConfigurations'),
       getOne: this.database.prepare(
-        'SELECT * from adhanTimeConfiguration WHERE id = ?',
+        'SELECT * from adhanTimeConfigurations WHERE id = ?',
       ),
     };
   }
 
-  create(configuration: AdhanTimeConfiguratioDto): AdhanTimeConfiguratioDto {
-    return this.statements.create.get(
-      configuration.id,
-      configuration.city,
-      configuration.country,
-    ) as AdhanTimeConfiguratioDto;
+  create(
+    configuration: AdhanTimeConfigurationWithoutIdDto,
+  ): AdhanTimeConfigurationWithIdDto {
+    const id = Bun.randomUUIDv7();
+    return this.statements.create.get({
+      calculationMethod: configuration.calculationMethod,
+      fajrAngle: configuration.fajrAngle ?? null,
+      highLatitudeRule: configuration.highLatitudeRule ?? null,
+      id,
+      ishaAngle: configuration.ishaAngle ?? null,
+      ishaInterval: configuration.ishaInterval ?? null,
+      latitude: configuration.latitude,
+      longitude: configuration.longitude,
+      madhab: configuration.madhab ?? null,
+      maghribAngle: configuration.maghribAngle ?? null,
+    }) as AdhanTimeConfigurationWithIdDto;
   }
 
-  getAll(): AdhanTimeConfiguratioDto[] {
-    return this.statements.getAll.all() as AdhanTimeConfiguratioDto[];
+  getAll(): AdhanTimeConfigurationWithIdDto[] {
+    return this.statements.getAll.all() as AdhanTimeConfigurationWithIdDto[];
   }
 
-  getOne(id: string): AdhanTimeConfiguratioDto {
-    return this.statements.getOne.get(id) as AdhanTimeConfiguratioDto;
+  getOne(id: string): AdhanTimeConfigurationWithIdDto {
+    return this.statements.getOne.get(id) as AdhanTimeConfigurationWithIdDto;
   }
 }
 
-const adhanTimeConfiguration = new AdhanTimeConfiguration(db);
-export default adhanTimeConfiguration;
+const adhanTimeConfigurationRepository = new AdhanTimeConfigurationRepository(
+  db,
+);
+export default adhanTimeConfigurationRepository;

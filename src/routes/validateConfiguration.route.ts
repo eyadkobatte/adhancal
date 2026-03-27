@@ -3,7 +3,7 @@ import type { ZodSafeParseResult, infer as ZInfer } from 'zod';
 
 import { object } from 'zod';
 
-import adhanTimeConfigurationRepository from '../db/adhanTimeConfiguration.repository';
+import adhan from '../clients/adhan.client';
 import AdhanTimeConfigurationSchema from '../db/adhanTimeConfiguration.schema';
 import logger from '../utils/logger';
 
@@ -26,11 +26,17 @@ const createCalendarEvent = async (request: BunRequest): Promise<Response> => {
       status: 400,
     });
   }
-  const adhanConfiguration = adhanTimeConfigurationRepository.create(
+
+  const prayerTimes = adhan.getPrayerTimesForToday(
     validated.data.adhanConfiguration,
   );
+
   return Response.json({
-    adhanConfiguration,
+    asr: prayerTimes.asr,
+    dhuhr: prayerTimes.dhuhr,
+    fajr: prayerTimes.fajr,
+    isha: prayerTimes.isha,
+    maghrib: prayerTimes.maghrib,
   });
 };
 

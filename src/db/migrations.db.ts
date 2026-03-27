@@ -3,7 +3,20 @@ import type { Database } from 'bun:sqlite';
 const MIGRATIONS = [
   {
     id: 'init',
-    statement: `CREATE TABLE IF NOT EXISTS adhanTimeConfiguration (id TEXT PRIMARY KEY, city TEXT, country TEXT)`,
+    statement: `
+    CREATE TABLE IF NOT EXISTS adhanTimeConfigurations (
+      id TEXT PRIMARY KEY, 
+      calculationMethod TEXT NOT NULL, 
+      latitude REAL NOT NULL, 
+      longitude REAL NOT NULL, 
+      fajrAngle INTEGER, 
+      ishaInterval INTEGER,
+      ishaAngle INTEGER,
+      maghribAngle INTEGER,
+      madhab TEXT,
+      highLatitudeRule TEXT
+    )
+  `,
   },
 ] as const;
 

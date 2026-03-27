@@ -1,6 +1,8 @@
 import createCalendarEvent from './routes/createCalendarEvent.route';
 import getCalendarEvent from './routes/getCalendarEvent.route';
 import getCalendarEvents from './routes/getCalendarEvents.route';
+import validateConfiguration from './routes/validateConfiguration.route';
+import logger from './utils/logger';
 
 const server = Bun.serve({
   hostname: '0.0.0.0',
@@ -11,7 +13,11 @@ const server = Bun.serve({
     '/:id': getCalendarEvent,
     '/create': createCalendarEvent,
     '/events': getCalendarEvents.handler,
+    '/validate': validateConfiguration,
   },
 });
 
-console.log(`Listening on ${server.url}`);
+logger.info('Listening on server', {
+  hostname: server.hostname,
+  port: server.port,
+});
