@@ -4,6 +4,7 @@ import type { ZodSafeParseResult, infer as ZInfer } from 'zod';
 import { object, string } from 'zod';
 
 import adhan from '../clients/adhan/adhan.client';
+import getICSString from '../clients/ics/ics.client';
 import adhanTimeConfiguration from '../db/adhanTimeConfiguration/adhanTimeConfiguration.repository';
 import logger from '../utils/logger';
 
@@ -15,7 +16,7 @@ const validator = (
   return schema.safeParse(body);
 };
 
-const getCalendarEvent = (request: BunRequest): Response => {
+const getCalendarEvent = async (request: BunRequest): Promise<Response> => {
   const validated = validator(request);
   if (!validated.success) {
     logger.error('Error in request', validated.error);
@@ -25,7 +26,9 @@ const getCalendarEvent = (request: BunRequest): Response => {
   const configuration = adhanTimeConfiguration.getOne(id);
   const prayerTimes = adhan.getPrayerTimesForToday(configuration);
 
-  return Response.json({ configuration, prayerTimes });
+  const ics = await getICSString(prayerTimes);
+
+  return new Response(ics);
 };
 
 export default getCalendarEvent;
