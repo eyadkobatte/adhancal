@@ -22,13 +22,18 @@ const getCalendarEvent = async (request: BunRequest): Promise<Response> => {
     logger.error('Error in request', validated.error);
     return new Response(validated.error.message, { status: 400 });
   }
+  const headers = new Headers({
+    'Content-Disposition': `attachment; filename=adhancal-${validated.data.id}.ics`,
+    'Content-Type': 'text/calendar; charset=utf-8',
+  });
+
   const { id } = validated.data;
   const configuration = adhanTimeConfiguration.getOne(id);
   const prayerTimes = adhan.getPrayerTimesForToday(configuration);
 
   const ics = await getICSString(prayerTimes);
 
-  return new Response(ics);
+  return new Response(ics, { headers });
 };
 
 export default getCalendarEvent;
