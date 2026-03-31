@@ -5,14 +5,7 @@ import { createEventsAsync } from 'ics';
 import { DateTime } from 'luxon';
 
 import ICS_CONSTANTS from './ics.constants';
-
-const getDateArray = (date: Date): [number, number, number, number, number] => [
-  date.getFullYear(),
-  date.getMonth(),
-  date.getDate(),
-  date.getHours(),
-  date.getMinutes(),
-];
+import getDateArray from './ics.date-array.utils';
 
 const convertPrayerTimesToICSEvent = (
   prayerTimes: PrayerTimes,

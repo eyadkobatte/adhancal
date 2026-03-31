@@ -14,6 +14,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           calculationMethod: 'invalid',
           latitude: 0,
           longitude: 0,
+          prayerDuration: 0,
         }),
       ).toThrow('Invalid calculation method'));
     test.each(Object.values(VALID_CALCULATION_METHODS))(
@@ -23,6 +24,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           calculationMethod: method,
           latitude: 0,
           longitude: 0,
+          prayerDuration: 0,
         });
         expect(result).toBeDefined();
       },
@@ -35,6 +37,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           calculationMethod: 'MuslimWorldLeague',
           latitude: 91,
           longitude: 0,
+          prayerDuration: 0,
         }),
       ).toThrow('Invalid latitude'));
   });
@@ -46,6 +49,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           latitude: 0,
           longitude: 0,
           maghribAngle: 18,
+          prayerDuration: 0,
         }),
       ).toThrow('Maghrib angle is not allowed for this calculation method');
     });
