@@ -21,6 +21,10 @@ RUN bun build ./src/app.ts --target bun --outfile dist/app.js
 # ==========================================
 FROM oven/bun:alpine AS runner
 
+# Add OCI standard labels for GHCR
+LABEL org.opencontainers.image.source="https://github.com/eyadkobatte/adhancal"
+LABEL org.opencontainers.image.description="Adhan calendar subscription server"
+
 WORKDIR /app
 
 # Only copy the final compiled application from the builder stage
