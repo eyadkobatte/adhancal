@@ -15,6 +15,14 @@ export default defineConfig({
   },
   globals: {},
   ignorePatterns: [],
+  overrides: [
+    {
+      files: ['**/*.test.ts'],
+      rules: {
+        'max-lines-per-function': 'off',
+      },
+    },
+  ],
   plugins: ['import', 'typescript', 'eslint'],
   rules: {
     'eslint/no-unused-vars': 'error',
