@@ -1,11 +1,13 @@
-const MONTH_STARTS_FROM_ZERO_OFFSET = 1;
+import type { DateTime } from 'luxon';
 
-const getDateArray = (date: Date): [number, number, number, number, number] => [
-  date.getFullYear(),
-  date.getMonth() + MONTH_STARTS_FROM_ZERO_OFFSET,
-  date.getDate(),
-  date.getHours(),
-  date.getMinutes(),
+const getDateArray = (
+  date: DateTime,
+): [number, number, number, number, number] => [
+  date.year,
+  date.month,
+  date.day,
+  date.hour,
+  date.minute,
 ];
 
 export default getDateArray;

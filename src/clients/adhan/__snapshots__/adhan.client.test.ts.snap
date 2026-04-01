@@ -1,0 +1,46 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`getPrayerTimesForToday should return the correct prayer times 1`] = `
+PrayerTimes {
+  "asr": 2026-03-31T15:37:00.000Z,
+  "calculationParameters": CalculationParameters {
+    "adjustments": {
+      "asr": 0,
+      "dhuhr": 0,
+      "fajr": 0,
+      "isha": 0,
+      "maghrib": 0,
+      "sunrise": 0,
+    },
+    "fajrAngle": 18,
+    "highLatitudeRule": "middleofthenight",
+    "ishaAngle": 18,
+    "ishaInterval": 0,
+    "madhab": "shafi",
+    "maghribAngle": 0,
+    "method": "MoonsightingCommittee",
+    "methodAdjustments": {
+      "asr": 0,
+      "dhuhr": 5,
+      "fajr": 0,
+      "isha": 0,
+      "maghrib": 3,
+      "sunrise": 0,
+    },
+    "polarCircleResolution": "Unresolved",
+    "rounding": "nearest",
+    "shafaq": "general",
+  },
+  "coordinates": Coordinates {
+    "latitude": 51.5072,
+    "longitude": -0.1276,
+  },
+  "date": 2026-03-31T15:00:00.000Z,
+  "dhuhr": 2026-03-31T12:10:00.000Z,
+  "fajr": 2026-03-31T04:03:00.000Z,
+  "isha": 2026-03-31T19:47:00.000Z,
+  "maghrib": 2026-03-31T18:35:00.000Z,
+  "sunrise": 2026-03-31T05:38:00.000Z,
+  "sunset": 2026-03-31T18:32:00.000Z,
+}
+`;
