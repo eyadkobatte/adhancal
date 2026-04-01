@@ -15,6 +15,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           latitude: 0,
           longitude: 0,
           prayerDuration: 0,
+          timezone: 'UTC',
         }),
       ).toThrow('Invalid calculation method'));
     test.each(Object.values(VALID_CALCULATION_METHODS))(
@@ -25,6 +26,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           latitude: 0,
           longitude: 0,
           prayerDuration: 0,
+          timezone: 'UTC',
         });
         expect(result).toBeDefined();
       },
@@ -38,8 +40,31 @@ describe('AdhanTimeConfigurationSchema', () => {
           latitude: 91,
           longitude: 0,
           prayerDuration: 0,
+          timezone: 'UTC',
         }),
       ).toThrow('Invalid latitude'));
+  });
+  describe('Timezone', () => {
+    test('should throw error for invalid timezone', () =>
+      expect(() =>
+        AdhanTimeConfigurationSchema.parse({
+          calculationMethod: 'MuslimWorldLeague',
+          latitude: 0,
+          longitude: 0,
+          prayerDuration: 0,
+          timezone: 'INVALID',
+        }),
+      ).toThrow('Invalid timezone'));
+    test('should accept a valid timezone', () =>
+      expect(
+        AdhanTimeConfigurationSchema.parse({
+          calculationMethod: 'MuslimWorldLeague',
+          latitude: 0,
+          longitude: 0,
+          prayerDuration: 0,
+          timezone: 'UTC',
+        }),
+      ).toBeDefined());
   });
   describe('Edge cases', () => {
     test('Maghrib angle is only allowed for Tehran Method', () => {
@@ -50,6 +75,7 @@ describe('AdhanTimeConfigurationSchema', () => {
           longitude: 0,
           maghribAngle: 18,
           prayerDuration: 0,
+          timezone: 'UTC',
         }),
       ).toThrow('Maghrib angle is not allowed for this calculation method');
     });
