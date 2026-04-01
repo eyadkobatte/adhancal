@@ -1,55 +1,9 @@
 import type { PrayerTimes } from 'adhan';
-import type { EventAttributes } from 'ics';
 
 import { createEventsAsync } from 'ics';
-import { DateTime } from 'luxon';
 
 import ICS_CONSTANTS from './ics.constants';
-import getDateArray from './ics.date-array.utils';
-
-const convertPrayerTimesToICSEvent = (
-  prayerTimes: PrayerTimes,
-): EventAttributes[] => {
-  const { fajr, sunrise, dhuhr, asr, maghrib, isha } = prayerTimes;
-
-  return [
-    {
-      busyStatus: 'FREE',
-      end: getDateArray(sunrise),
-      start: getDateArray(fajr),
-      title: 'Fajr',
-      transp: 'TRANSPARENT',
-    },
-    {
-      busyStatus: 'FREE',
-      end: getDateArray(asr),
-      start: getDateArray(dhuhr),
-      title: 'Dhuhr',
-      transp: 'TRANSPARENT',
-    },
-    {
-      busyStatus: 'FREE',
-      end: getDateArray(maghrib),
-      start: getDateArray(asr),
-      title: 'Asr',
-      transp: 'TRANSPARENT',
-    },
-    {
-      busyStatus: 'FREE',
-      end: getDateArray(isha),
-      start: getDateArray(maghrib),
-      title: 'Maghrib',
-      transp: 'TRANSPARENT',
-    },
-    {
-      busyStatus: 'FREE',
-      end: getDateArray(DateTime.fromJSDate(isha).endOf('day').toJSDate()),
-      start: getDateArray(isha),
-      title: 'Isha',
-      transp: 'TRANSPARENT',
-    },
-  ];
-};
+import convertPrayerTimesToICSEvent from './ics.conversion.utils';
 
 const getICSString = async (prayerTimes: PrayerTimes): Promise<string> => {
   const icsString = await createEventsAsync(

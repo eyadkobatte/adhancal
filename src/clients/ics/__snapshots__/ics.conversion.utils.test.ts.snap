@@ -1,0 +1,41 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`convertPrayerTimesToICSEvent should convert valid prayer time to events 1`] = `
+[
+  {
+    "busyStatus": "FREE",
+    "end": 1774936860000,
+    "start": 1774937040000,
+    "title": "Fajr",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1774969860000,
+    "start": 1774958640000,
+    "title": "Dhuhr",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1774980420000,
+    "start": 1774969860000,
+    "title": "Asr",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1774980420000,
+    "start": 1774969860000,
+    "title": "Maghrib",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1775001599999,
+    "start": 1774980240000,
+    "title": "Isha",
+    "transp": "TRANSPARENT",
+  },
+]
+`;

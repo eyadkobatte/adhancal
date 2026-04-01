@@ -31,6 +31,7 @@ export default defineConfig({
     'max-statements': ['error', { max: 20 }],
     'new-cap': 'off',
     'no-duplicate-imports': ['error', { allowSeparateTypeImports: true }],
+    'no-magic-numbers': ['error', { ignore: [0] }],
     'no-undefined': 'off',
     'sort-imports': 'off',
     'sort-keys': ['error', 'asc', { allowLineSeparatedGroups: true }],
