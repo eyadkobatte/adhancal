@@ -27,8 +27,9 @@ class AdhanTimeConfigurationRepository {
           ishaInterval,
           madhab,
           highLatitudeRule,
-          prayerDuration
-        ) VALUES (:id, :calculationMethod, :latitude, :longitude, :fajrAngle, :maghribAngle, :ishaAngle, :ishaInterval, :madhab, :highLatitudeRule, :prayerDuration) RETURNING *`,
+          prayerDuration,
+          timezone
+        ) VALUES (:id, :calculationMethod, :latitude, :longitude, :fajrAngle, :maghribAngle, :ishaAngle, :ishaInterval, :madhab, :highLatitudeRule, :prayerDuration, :timezone) RETURNING *`,
       ),
       getAll: this.database.prepare('SELECT * from adhanTimeConfigurations'),
       getOne: this.database.prepare(
@@ -53,6 +54,7 @@ class AdhanTimeConfigurationRepository {
       madhab: configuration.madhab ?? null,
       maghribAngle: configuration.maghribAngle ?? null,
       prayerDuration: configuration.prayerDuration,
+      timezone: configuration.timezone,
     }) as AdhanTimeConfigurationWithIdDto;
   }
 
