@@ -32,8 +32,8 @@ const convertPrayerTimesToICSEvent = (
     },
     {
       busyStatus: 'FREE',
-      end: maghrib.getTime(),
-      start: asr.getTime(),
+      end: isha.getTime(),
+      start: maghrib.getTime(),
       title: 'Maghrib',
       transp: 'TRANSPARENT',
     },
