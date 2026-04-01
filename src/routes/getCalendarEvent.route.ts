@@ -31,7 +31,7 @@ const getCalendarEvent = async (request: BunRequest): Promise<Response> => {
   const configuration = adhanTimeConfiguration.getOne(id);
   const prayerTimes = adhan.getPrayerTimesForToday(configuration);
 
-  const ics = await getICSString(prayerTimes);
+  const ics = await getICSString(prayerTimes, configuration);
 
   return new Response(ics, { headers });
 };

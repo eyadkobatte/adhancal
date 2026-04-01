@@ -1,5 +1,7 @@
 import type { Database } from 'bun:sqlite';
 
+import logger from '../utils/logger';
+
 const MIGRATIONS = [
   {
     id: 'init',
@@ -21,6 +23,13 @@ const MIGRATIONS = [
       createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
       updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
     )
+  `,
+  },
+  {
+    id: 'add-timezone-to-adhanTimeConfigurations',
+    statement: `
+    ALTER TABLE adhanTimeConfigurations
+    ADD COLUMN timezone TEXT NOT NULL DEFAULT 'UTC';
   `,
   },
 ] as const;
@@ -45,6 +54,7 @@ const migrate = (db: Database): void => {
       if (!applied.has(migration.id)) {
         db.run(migration.statement);
         db.run('INSERT INTO migrations (id) VALUES (?)', [migration.id]);
+        logger.debug('Applied migration', { migrationId: migration.id });
       }
     }
   });

@@ -25,14 +25,54 @@ exports[`convertPrayerTimesToICSEvent should convert valid prayer time to events
   },
   {
     "busyStatus": "FREE",
-    "end": 1774980420000,
-    "start": 1774969860000,
+    "end": 1774980240000,
+    "start": 1774980420000,
     "title": "Maghrib",
     "transp": "TRANSPARENT",
   },
   {
     "busyStatus": "FREE",
     "end": 1775001599999,
+    "start": 1774980240000,
+    "title": "Isha",
+    "transp": "TRANSPARENT",
+  },
+]
+`;
+
+exports[`convertPrayerTimesToICSEvent should handle different timezone 1`] = `
+[
+  {
+    "busyStatus": "FREE",
+    "end": 1774936860000,
+    "start": 1774937040000,
+    "title": "Fajr",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1774969860000,
+    "start": 1774958640000,
+    "title": "Dhuhr",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1774980420000,
+    "start": 1774969860000,
+    "title": "Asr",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1774980240000,
+    "start": 1774980420000,
+    "title": "Maghrib",
+    "transp": "TRANSPARENT",
+  },
+  {
+    "busyStatus": "FREE",
+    "end": 1775026799999,
     "start": 1774980240000,
     "title": "Isha",
     "transp": "TRANSPARENT",

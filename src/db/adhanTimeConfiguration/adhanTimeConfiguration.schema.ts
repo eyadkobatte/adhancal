@@ -1,6 +1,7 @@
 import type { HighLatitudeRule, Madhab } from 'adhan';
 
 import { CalculationMethod } from 'adhan';
+import { Info } from 'luxon';
 import { z } from 'zod';
 
 import VALID_CALCULATION_METHODS from '../../clients/adhan/adhan.calculationMethods.constants';
@@ -79,6 +80,16 @@ const maghribAngle = z.int().optional();
 
 const prayerDuration = z.int().or(z.literal('END'));
 
+const timezone = z.string().refine(
+  (value: string) => {
+    if (Info.isValidIANAZone(value)) {
+      return value;
+    }
+    return false;
+  },
+  { error: 'Invalid timezone' },
+);
+
 const AdhanTimeConfigurationSchema = z
   .object({
     // Required
@@ -86,6 +97,7 @@ const AdhanTimeConfigurationSchema = z
     latitude,
     longitude,
     prayerDuration,
+    timezone,
 
     // Optional
     fajrAngle,

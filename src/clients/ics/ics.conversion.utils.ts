@@ -1,3 +1,4 @@
+import type { AdhanTimeConfigurationWithIdDto } from '../../db/adhanTimeConfiguration/adhanTimeConfiguration.dto';
 import type { PrayerTimes } from 'adhan';
 import type { EventAttributes } from 'ics';
 
@@ -5,6 +6,7 @@ import { DateTime } from 'luxon';
 
 const convertPrayerTimesToICSEvent = (
   prayerTimes: PrayerTimes,
+  configuration: AdhanTimeConfigurationWithIdDto,
 ): EventAttributes[] => {
   const { fajr, sunrise, dhuhr, asr, maghrib, isha } = prayerTimes;
 
@@ -39,7 +41,10 @@ const convertPrayerTimesToICSEvent = (
     },
     {
       busyStatus: 'FREE',
-      end: DateTime.fromJSDate(isha).endOf('day').toJSDate().getTime(),
+      end: DateTime.fromJSDate(isha, { zone: configuration.timezone })
+        .endOf('day')
+        .toJSDate()
+        .getTime(),
       start: isha.getTime(),
       title: 'Isha',
       transp: 'TRANSPARENT',
