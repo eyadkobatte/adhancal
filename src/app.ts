@@ -1,6 +1,7 @@
 import createCalendarEvent from './routes/createCalendarEvent.route';
 import getCalendarEvent from './routes/getCalendarEvent.route';
 import getCalendarEvents from './routes/getCalendarEvents.route';
+import statusRoute from './routes/status.route';
 import validateConfiguration from './routes/validateConfiguration.route';
 import logger from './utils/logger';
 
@@ -13,6 +14,7 @@ const server = Bun.serve({
     '/:id': getCalendarEvent,
     '/create': createCalendarEvent,
     '/events': getCalendarEvents.handler,
+    '/status': statusRoute.handler,
     '/validate': validateConfiguration,
   },
 });
